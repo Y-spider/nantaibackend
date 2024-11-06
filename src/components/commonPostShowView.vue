@@ -711,14 +711,18 @@ export default {
             // 表示上架
             modifyPostData[0] = {
               id:post.id,
-              state:0
+              state:0,
+              openid:post.openid,
+              title:post.title
             }
           }
           else if(type==2){
             // 表示下架
             modifyPostData[0] = {
               id:post.id,
-              state:1
+              state:1,
+              openid:post.openid,
+              title:post.title
             }
           }
           else{

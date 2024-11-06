@@ -114,7 +114,7 @@
             >
 
             <el-button
-              v-if="scope.row.state == 1"
+              v-if="scope.row.state == 1 || scope.row.state == -1"
               size="mini"
               type="danger"
               @click="handleDeleteDoc(scope.row, scope.$index)"
@@ -281,10 +281,10 @@ export default {
     },
     async handleDeleteDoc(data) {
       // 删除文档
-      this.$confirm(`确定删除文档: ${data.docName}?`, "删除文档")
+      this.$confirm(`确定删除网站: ${data.title}?`, "删除网站")
         .then(async () => {
           // 点击确定，进行删除
-          let res = await modifyDocumentAPI({ id: data.id, isDelete: 1 });
+          let res = await modifyWebsiteAPI({ id: data.id, isDelete: 1 });
           this.$message.success("删除成功");
           this.init();
         })
@@ -328,6 +328,7 @@ export default {
       this.formOfWebsite.id = data.id;
       this.formOfWebsite.openid = data.openid;
       this.formOfWebsite.handleDes = "";
+      this.formOfWebsite.url = data.url
     },
     handleEdit(data, index) {
       // 修改弹框

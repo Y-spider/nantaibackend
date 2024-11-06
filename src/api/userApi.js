@@ -45,10 +45,13 @@ export function logoutAPI(){
 }
 
 
-export function getWechatUserAPI(pageIndex,paseSize,search){
+export function getWechatUserAPI(pageIndex,paseSize,search,state){
     let url = "/user/page?pageIndex="+pageIndex+"&pageSize="+paseSize
-    if(search!=""){
+    if(search!="" || search != null){
         url += "&search="+search
+    }
+    if(state != undefined|| state != null){
+        url+="&state="+state
     }
     return instance_wechat.get(url,{
         headers:{

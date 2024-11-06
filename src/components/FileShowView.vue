@@ -112,7 +112,7 @@
           </template>
         </el-table-column>
         <el-table-column label="图片数量" prop="imageCount"> </el-table-column>
-        <el-table-column fixed="right" width="300x" label="操作">
+        <el-table-column fixed="right" width="400x" label="操作">
           <template slot-scope="scope" v-if="scope.row.isDelete == false">
             <el-button
               v-if="scope.row.state == 1"
@@ -151,11 +151,11 @@
               >查看</el-button
             >
             <el-button
-              v-if="scope.row.state == -1 && scope.row.docPath != ''"
+            v-if="scope.row.state !== -1"
               size="mini"
               type="danger"
               @click="handleDeleteDoc(scope.row, scope.$index,1)"
-              >物理删除文件</el-button
+              >物理删除</el-button
             >
           </template>
         </el-table-column>
@@ -266,6 +266,7 @@ export default {
         id: "",
         state: "",
         docPath: "",
+        docName:""
       }, // 记录修改文档的内容
       dialogVisible: false,
       operateType: 0, // 弹出框确认类型标识   0 表示修改文档信息  1表示审核文档 -1表示查看审核拒绝信息
@@ -297,7 +298,7 @@ export default {
           // 点击确定，进行删除
           let res = null ;
           if(deleteType === 0){
-            res = await modifyDocumentAPI({ id: data.id, isDelete: 1,docPath:data.docPath });
+            res = await modifyDocumentAPI({ id: data.id, isDelete: 1,docPath:data.docPath,isPhysicalDelete:false });
           }
           else{
             res = await modifyDocumentAPI({ id: data.id, isDelete: 1,isPhysicalDelete:true,docPath:data.docPath });
@@ -344,6 +345,7 @@ export default {
       this.formOfDoc.openid = data.openid;
       this.formOfDoc.handleDes = "";
       this.formOfDoc.docPath = data.docPath;
+      this.formOfDoc.docName = data.docName;
     },
     handleEdit(data, index) {
       // 修改弹框

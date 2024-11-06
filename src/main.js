@@ -12,6 +12,7 @@ Vue.prototype.$request = axios
 Vue.config.productionTip = false
 Vue.prototype.$baseImageUrl = "http://localhost/"
 Vue.prototype.$baseDocumentImageUrl = "http://localhost:6135/"
+Vue.prototype.$baseSwiperImgaeUrl = "http://localhost:6136/"
 Vue.use(ElementUI,{size:"small"});
 Vue.use(resetCss)
 new Vue({
